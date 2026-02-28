@@ -61,9 +61,6 @@ function join_tracks() {
     local OUTPUT_DIR=$2
     local TMP_DIR=$3
 
-    echo "Joining these tracks:"
-    echo "${FILES_[@]}"
-
     shntool join -d "$TMP_DIR" "${FILES_[@]}"
     sox "$TMP_DIR/joined.wav" -t raw -r 44100 -e signed -b 16 -c 2 "$OUTPUT_DIR/album.bin"
 
