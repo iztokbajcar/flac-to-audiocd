@@ -62,7 +62,7 @@ function join_tracks() {
     local TMP_DIR=$3
 
     shntool join -d "$TMP_DIR" "${FILES_[@]}"
-    sox "$TMP_DIR/joined.wav" -t raw -r 44100 -e signed -b 16 -c 2 "$OUTPUT_DIR/album.bin"
+    sox "$TMP_DIR/joined.wav" -t raw -r 44100 -e signed -b 16 -c 2 -B "$OUTPUT_DIR/album.bin"
 
     rm "$TMP_DIR/joined.wav"
 }
