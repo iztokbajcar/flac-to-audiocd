@@ -68,6 +68,7 @@ function join_tracks() {
 }
 
 # fail if the required commands don't exist
+command_exists_guard iconv
 command_exists_guard metaflac
 command_exists_guard printf
 command_exists_guard sed
@@ -85,7 +86,7 @@ TMP_DIR=$(mktemp -d)
 
 convert_to_cd_quality FILES "$TMP_DIR"
 CONVERTED_FILES=("$TMP_DIR"/*.flac)
-generate_cue CONVERTED_FILES "album" > "$OUTPUT_DIR"/album.cue
+generate_cue CONVERTED_FILES "album" | iconv -f UTF-8 -t ISO-8859-1 > "$OUTPUT_DIR"/album.cue
 
 join_tracks CONVERTED_FILES "$OUTPUT_DIR" "$TMP_DIR"
 
