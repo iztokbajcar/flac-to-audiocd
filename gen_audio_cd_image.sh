@@ -1,11 +1,6 @@
 #!/bin/bash
 
-function command_exists_guard() {
-    if [ -z $(command -v "$1") ]; then
-        echo "ERROR: Command '$1' not installed!" >&2
-        exit 1
-    fi
-}
+source common.sh
 
 function convert_to_cd_quality() {
     local -n FILES_=$1
@@ -62,7 +57,7 @@ function join_tracks() {
     local TMP_DIR=$3
 
     shntool join -d "$TMP_DIR" "${FILES_[@]}"
-    sox "$TMP_DIR/joined.wav" -t raw -r 44100 -e signed -b 16 -c 2 -B "$OUTPUT_DIR/album.bin"
+    sox "$TMP_DIR/joined.wav" -t raw -r 44100 -e signed -b 16 -c 2 "$OUTPUT_DIR/album.bin"
 
     rm "$TMP_DIR/joined.wav"
 }
