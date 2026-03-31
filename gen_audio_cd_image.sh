@@ -42,7 +42,7 @@ function generate_cue() {
         local FRAME=$(( CUMUL_FRAMES % 75 ))
 
         # print track info
-        printf "  TRACK %02d AUDIO\n" $TRACK
+        printf "  TRACK %02d AUDIO\n" $((10#$TRACK))
         echo "    TITLE \"${TITLE}\""
         echo "    PERFORMER \"${ARTIST}\""
         printf "    INDEX 01 %02d:%02d:%02d\n" $MINUTE $SECOND $FRAME
