@@ -71,7 +71,10 @@ command_exists_guard shntool
 command_exists_guard sox
 
 INPUT_DIR=${1:-$PWD}
-OUTPUT_DIR=${2:-$INPUT_DIR}
+CUE_ENCODING=${2:-ISO-8859-1}
+OUTPUT_DIR=${3:-$INPUT_DIR}
+
+echo "Using ${CUE_ENCODING} as the character encoding"
 
 # get file listing
 FILES=("$INPUT_DIR"/*.flac)
@@ -81,7 +84,8 @@ TMP_DIR=$(mktemp -d)
 
 convert_to_cd_quality FILES "$TMP_DIR"
 CONVERTED_FILES=("$TMP_DIR"/*.flac)
-generate_cue CONVERTED_FILES "album" | iconv -f UTF-8 -t ISO-8859-1 > "$OUTPUT_DIR"/album.cue
+
+generate_cue CONVERTED_FILES "album" | iconv -f UTF-8 -t ${CUE_ENCODING}//IGNORE -c > "$OUTPUT_DIR"/album.cue
 
 join_tracks CONVERTED_FILES "$OUTPUT_DIR" "$TMP_DIR"
 
