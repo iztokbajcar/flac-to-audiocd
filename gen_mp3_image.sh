@@ -41,15 +41,15 @@ function convert_to_mp3() {
 
 function create_iso() {
     echo "Creating the ISO file..."
-    mkisofs -o "${OUTPUT_DIR}/album.iso" -J -R -V "$ALBUM_ARTIST - $ALBUM" "$TMP_DIR"
+    xorriso -as mkisofs -o "${OUTPUT_DIR}/album.iso" -J -R -V "$ALBUM_ARTIST - $ALBUM" "$TMP_DIR"
 }
 
 # fail if the required commands don't exist
 command_exists_guard eyeD3
 command_exists_guard metaflac
-command_exists_guard mkisofs
 command_exists_guard sed
 command_exists_guard sox
+command_exists_guard xorriso
 
 INPUT_DIR=${1:-$PWD}
 OUTPUT_DIR=${2:-$INPUT_DIR}
